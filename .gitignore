@@ -1,0 +1,5 @@
+# Build and Release Folders
+build/
+
+# Other files and folders
+.vscoce/

@@ -1,0 +1,13 @@
+{
+  "package_name": "ebakusdb",
+  "version": "0.0.1",
+  "description": "Library for giving access to EbakusDB",
+  "authors": [
+    "Chris Ziogas <chris@ebakus.com>"
+  ],
+  "keywords": [
+    "ebakus",
+    "db"
+  ],
+  "license": "MIT"
+}
