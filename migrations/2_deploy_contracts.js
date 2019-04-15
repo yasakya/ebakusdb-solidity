@@ -13,9 +13,9 @@ module.exports = async function(deployer) {
 
   try {
     const receipt = await instance.createTable();
-    console.warn('Table created: ', receipt.logs[0].args._value.toString(10));
+    console.warn('Table created.');
   } catch (err) {
-    console.error('Table creation err: ', err);
+    console.error('Table exists or something went wrong.');
   }
 
   try {
@@ -24,20 +24,6 @@ module.exports = async function(deployer) {
     console.warn('User2 inserted: ', receipt.logs[1].args._value.toString(10));
   } catch (err) {
     console.error('Users insertion err: ', err);
-  }
-
-  try {
-    const res = await instance.select1.call();
-    console.log(
-      'Get User1 = Id:',
-      res[0].toString(10),
-      'Name:',
-      res[1],
-      'Pass:',
-      res[2]
-    );
-  } catch (err) {
-    console.error('Get User1 err: ', err);
   }
 
   try {
@@ -59,6 +45,22 @@ module.exports = async function(deployer) {
   }
 
   try {
+    const res = await instance.get.call();
+    console.log(
+      'Get User1 = Id:',
+      res[0].toString(10),
+      'Name:',
+      res[1],
+      'Pass:',
+      res[2],
+      'Email:',
+      res[3]
+    );
+  } catch (err) {
+    console.error('Get User1 err: ', err);
+  }
+
+  try {
     const receipt = await instance.deleteObj();
     console.warn('User1 deleted: ', receipt.logs[0].args._value.toString(10));
   } catch (err) {
@@ -66,7 +68,7 @@ module.exports = async function(deployer) {
   }
 
   try {
-    const res = await instance.select1.call();
+    const res = await instance.get.call();
     console.log(
       'Get User1 = Id:',
       res[0].toString(10),
