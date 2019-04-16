@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "../EbakusDB.sol";
 
 contract Example {
-	event LogUser(uint Id, string Name, string Pass);
+	event LogUser(uint Id, string Name, string Pass, string Email);
 	event LogBool(bool _value);
 
 	string TableName = "Users";
@@ -12,6 +12,7 @@ contract Example {
     uint64 Id;
     string Name;
     string Pass;
+    string Email;
   }
 
 	constructor() public {
@@ -42,21 +43,22 @@ contract Example {
 		// 	"inputs": [
 		// 		{"name": "Id", "type": "uint64"},
 		// 		{"name": "Name", "type": "string"},
-		// 		{"name": "Pass", "type": "string"}
+		// 		{"name": "Pass", "type": "string"},
+		// 		{"name": "Email", "type": "string"}
 		// 	]
 		// }]
-		string memory tablesAbi = '[{"type":"table","name":"Users","inputs":[{"name":"Id","type":"uint64"},{"name":"Name","type":"string"},{"name":"Pass","type":"string"}]}]';
-		EbakusDB.createTable(TableName, "Name", tablesAbi);
+		string memory tablesAbi = '[{"type":"table","name":"Users","inputs":[{"name":"Id","type":"uint64"},{"name":"Name","type":"string"},{"name":"Pass","type":"string"},{"name":"Email","type":"string"}]}]';
+		EbakusDB.createTable(TableName, "Name,Email", tablesAbi);
 	}
 
 	function get() external {
 		User memory u;
 
 		bytes memory prefix = new bytes(0);
-		bytes memory out = EbakusDB.get(TableName, "Name", prefix);
+		bytes memory out = EbakusDB.get(TableName, "Email", prefix);
 
-		(u.Id, u.Name, u.Pass) = abi.decode(out, (uint64, string, string));
-		emit LogUser(u.Id, u.Name, u.Pass);
+		(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
+		emit LogUser(u.Id, u.Name, u.Pass, u.Email);
 	}
 
 	function select() external {
@@ -69,50 +71,47 @@ contract Example {
 
 		(out ,found) = EbakusDB.next(iter);
 		if (found) {
-			(u.Id, u.Name, u.Pass) = abi.decode(out, (uint64, string, string));
-			emit LogUser(u.Id, u.Name, u.Pass);
+			(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
+			emit LogUser(u.Id, u.Name, u.Pass, u.Email);
 		}
 
 		(out ,found) = EbakusDB.next(iter);
 		if (found) {
-			(u.Id, u.Name, u.Pass) = abi.decode(out, (uint64, string, string));
-			emit LogUser(u.Id, u.Name, u.Pass);
+			(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
+			emit LogUser(u.Id, u.Name, u.Pass, u.Email);
 		}
 
 		(out ,found) = EbakusDB.next(iter);
+		require(!found);
 		emit LogBool(!found);
-		if (found) {
-			(u.Id, u.Name, u.Pass) = abi.decode(out, (uint64, string, string));
-			emit LogUser(u.Id, u.Name, u.Pass);
-		}
 	}
 
-	function insertObj() external {
+	function insertObjs() external {
 		User memory u;
 		bytes memory input;
 
-		u = User(1, "Harry", "123");
-		input = abi.encode(u.Id, u.Name, u.Pass);
+		u = User(1, "Harry", "123", "harry@ebakus.com");
+		input = abi.encode(u.Id, u.Name, u.Pass, u.Email);
 		bool out = EbakusDB.insertObj(TableName, input);
 		emit LogBool(out);
 
-		u = User(2, "Chris", "456");
-		input = abi.encode(u.Id, u.Name, u.Pass);
+		u = User(2, "Chris", "456", "chris@ebakus.com");
+		input = abi.encode(u.Id, u.Name, u.Pass, u.Email);
 		out = EbakusDB.insertObj(TableName, input);
 		emit LogBool(out);
 	}
 
-	function insertObj2() external {
+	function updateObjs() external {
 		User memory u;
 		bytes memory input;
 
-		u = User(1, "Harry", "1234");
-		input = abi.encode(u.Id, u.Name, u.Pass);
+		u = User(1, "Harry", "1234", "harry@ebakus.com");
+		input = abi.encode(u.Id, u.Name, u.Pass, u.Email);
 		bool out = EbakusDB.insertObj(TableName, input);
 		emit LogBool(out);
 
-		u = User(2, "Chris", "4567");
-		input = abi.encode(u.Id, u.Name, u.Pass);
+		u = User(2, "Chris", "4567", "chris@ebakus.com");
+		input = abi.encode(u.Id, u.Name, u.Pass, u.Email);
 		out = EbakusDB.insertObj(TableName, input);
 		emit LogBool(out);
 	}

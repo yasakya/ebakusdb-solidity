@@ -2,12 +2,7 @@ const EbakusDB = artifacts.require('EbakusDB');
 const Example = artifacts.require('examples/Example');
 
 module.exports = async function(deployer, network) {
-  let libDeployOptions = {};
-  if (network !== 'development') {
-    libDeployOptions.overwrite = false;
-  }
-
-  deployer.deploy(EbakusDB, libDeployOptions);
+  deployer.deploy(EbakusDB, { overwrite: false });
 
   // Example use for development
   if (network === 'development') {
@@ -20,14 +15,14 @@ module.exports = async function(deployer, network) {
     const instance = await Example.deployed();
 
     try {
-      const receipt = await instance.createTable();
+      await instance.createTable();
       console.warn('Table created.');
     } catch (err) {
       console.error('Table exists or something went wrong.');
     }
 
     try {
-      const receipt = await instance.insertObj();
+      const receipt = await instance.insertObjs();
       console.warn(
         'User1 inserted: ',
         receipt.logs[0].args._value.toString(10)
@@ -43,25 +38,19 @@ module.exports = async function(deployer, network) {
     try {
       const receipt = await instance.select();
       console.log(
-        'Select next: User1(%d, %s, %s)',
+        'Select next: User1(%d, %s, %s, %s)',
         receipt.logs[0].args.Id.toString(10),
         receipt.logs[0].args.Name.toString(10),
-        receipt.logs[0].args.Pass.toString(10)
+        receipt.logs[0].args.Pass.toString(10),
+        receipt.logs[0].args.Email.toString(10)
       );
       console.log(
-        'Select next: User2(%d, %s, %s)',
+        'Select next: User2(%d, %s, %s, %s)',
         receipt.logs[1].args.Id.toString(10),
         receipt.logs[1].args.Name.toString(10),
-        receipt.logs[1].args.Pass.toString(10)
+        receipt.logs[1].args.Pass.toString(10),
+        receipt.logs[1].args.Email.toString(10)
       );
-
-      // // console.log(
-      // //   'Select next: User3(%d, %s, %s, %s)',
-      // //   receipt.logs[2].args.Id.toString(10),
-      // //   receipt.logs[2].args.Name.toString(10),
-      // //   receipt.logs[2].args.Pass.toString(10)
-      // //   // receipt.logs[2].args.Email.toString(10)
-      // // );
 
       console.log(
         'Select next: No other users found: ',
@@ -72,7 +61,7 @@ module.exports = async function(deployer, network) {
     }
 
     try {
-      const receipt = await instance.insertObj2();
+      const receipt = await instance.updateObjs();
       console.warn(
         'User1 inserted: ',
         receipt.logs[0].args._value.toString(10)
@@ -88,10 +77,11 @@ module.exports = async function(deployer, network) {
     try {
       const receipt = await instance.get();
       console.log(
-        'Get user: %d, %s, %s',
+        'Get user: %d, %s, %s, %s',
         receipt.logs[0].args.Id.toString(10),
         receipt.logs[0].args.Name.toString(10),
-        receipt.logs[0].args.Pass.toString(10)
+        receipt.logs[0].args.Pass.toString(10),
+        receipt.logs[0].args.Email.toString(10)
       );
     } catch (err) {
       console.error('Get User1 err: ', err);
@@ -111,7 +101,8 @@ module.exports = async function(deployer, network) {
     //     'Get user: %d, %s, %s',
     //     receipt.logs[0].args.Id.toString(10),
     //     receipt.logs[0].args.Name.toString(10),
-    //     receipt.logs[0].args.Pass.toString(10)
+    //     receipt.logs[0].args.Pass.toString(10),
+    //     receipt.logs[0].args.Email.toString(10)
     //   );
     // } catch (err) {
     //   console.error('Get User1 err: ', err);

@@ -5542,12 +5542,12 @@
     "101": {
       "events": {},
       "links": {},
-      "address": "0x5A3bDc7Dd782a4B98ce2f5f7C5Fb7c5475e38a77",
-      "transactionHash": "0x4183c53b1f1dd141ced591f62c4847b66be921412136a270961b9b41ea15afd2"
+      "address": "0xa54f1D535d785DcB51cBB0955D58CbB77d73cf1D",
+      "transactionHash": "0xab463bbc06b2224a3be7c5f0e9f2c9550ddaff0933f668989032a9ba8169f8d2"
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-16T12:05:51.493Z",
+  "updatedAt": "2019-04-16T14:24:27.823Z",
   "devdoc": {
     "details": "Library for giving access to EbakusDB.",
     "methods": {},
