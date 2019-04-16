@@ -47,14 +47,22 @@ library EbakusDB {
     return getBool(input);
   }
 
-  function next(bytes32 iter) internal returns (bytes memory o) {
+  function next(bytes32 iter) internal returns (bytes memory o, bool found) {
     bytes memory input = abi.encodeWithSignature("next(bytes32)", iter);
-    return getBytes(input);
+    o = getBytes(input);
+    // if (o.length != 0) {
+    //   return (o, true);
+    // } else {
+    //   return (o, false);
+    // }
+
+    return (o, o.length > 0);
   }
 
-  function prev(bytes32 iter) internal returns (bytes memory o) {
+  function prev(bytes32 iter) internal returns (bytes memory o, bool found) {
     bytes memory input = abi.encodeWithSignature("prev(bytes32)", iter);
-    return getBytes(input);
+    o = getBytes(input);
+    return (o, o.length > 0);
   }
 
   function getBytes(bytes memory input) private returns (bytes memory o) {

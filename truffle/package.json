@@ -1,0 +1,30 @@
+{
+  "name": "ebakusdb-solidity",
+  "version": "1.0.0",
+  "description": "Library for giving access to EbakusDB",
+  "scripts": {
+    "compile": "rm -rf build/contracts && truffle compile",
+    "publish": "truffle networks --clean && truffle publish",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziogaschr/ebakusdb-solidity.git"
+  },
+  "keywords": [
+    "solidity",
+    "ebakus",
+    "contracts",
+    "db"
+  ],
+  "author": "Chris Ziogas  <chris@ebakus.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ziogaschr/ebakusdb-solidity/issues"
+  },
+  "homepage": "https://github.com/ziogaschr/ebakusdb-solidity#readme",
+  "devDependencies": {
+    "truffle": "^5.0.10",
+    "truffle-hdwallet-provider": "^1.0.6"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "package_name": "ebakusdb",
-  "version": "0.0.1",
+  "package_name": "ebakusdb-solidity",
+  "version": "1.0.0",
   "description": "Library for giving access to EbakusDB",
   "authors": [
     "Chris Ziogas <chris@ebakus.com>"
