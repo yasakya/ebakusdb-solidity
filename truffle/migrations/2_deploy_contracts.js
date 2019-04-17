@@ -2,7 +2,12 @@ const EbakusDB = artifacts.require('EbakusDB');
 const Example = artifacts.require('examples/Example');
 
 module.exports = async function(deployer, network) {
-  deployer.deploy(EbakusDB, { overwrite: false });
+  let ebakusdbDeployOptions = {};
+  if (network !== 'development') {
+    ebakusdbDeployOptions.overwrite = true;
+  }
+
+  deployer.deploy(EbakusDB, ebakusdbDeployOptions);
 
   // Example use for development
   if (network === 'development') {
@@ -13,13 +18,6 @@ module.exports = async function(deployer, network) {
     console.warn('----------------');
 
     const instance = await Example.deployed();
-
-    try {
-      await instance.createTable();
-      console.warn('Table created.');
-    } catch (err) {
-      console.error('Table exists or something went wrong.');
-    }
 
     try {
       const receipt = await instance.insertObjs();

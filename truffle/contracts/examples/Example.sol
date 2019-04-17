@@ -16,27 +16,6 @@ contract Example {
   }
 
 	constructor() public {
-	}
-
-	// This is the constructor which creates the db tables and registers the ABI for them.
-	// constructor() public {
-	// 	// [{
-	// 	// 	"type": "table",
-	// 	// 	"name": "Users",
-	// 	// 	"inputs": [
-	// 	// 		{"name": "Id", "type": "uint64"},
-	// 	// 		{"name": "Name", "type": "string"},
-	// 	// 		{"name": "Pass", "type": "string"},
-	// 	// 		{"name": "Email", "type": "string"}
-	// 	// 	]
-	// 	// }]
-	// 	string memory tablesAbi = '[{"type":"table","name":"Users","inputs":[{"name":"Id","type":"uint64"},{"name":"Name","type":"string"},{"name":"Pass","type":"string"}]}]';
-
-	// 	bool created = EbakusDB.createTable(TableName, "Name", tablesAbi);
-	// 	require(created);
-	// }
-
-	function createTable() external {
 		// [{
 		// 	"type": "table",
 		// 	"name": "Users",
