@@ -45,6 +45,7 @@ module.exports = function(deployer) {
 
 ## Usage Example
 
+You can read about available EbakusDB methods and their documentation inline [here](truffle/contracts/EbakusDB.sol).
 You can find an example contract using the EbakusDB [here](truffle/contracts/examples/Example.sol).
 
 ```
@@ -61,10 +62,22 @@ contract Example {
     string Pass;
   }
 
-  function createTable() external {
+  constructor() public {
     string memory tablesAbi = '[{"type":"table","name":"Users","inputs":[{"name":"Id","type":"uint64"},{"name":"Name","type":"string"},{"name":"Pass","type":"string"}]}]';
 
     EbakusDB.createTable(TableName, "Name", tablesAbi);
+  }
+
+  function main() external {
+    // Insert entry
+    User memory u = User(1, "Harry", "123");
+    bytes memory input = abi.encode(u.Id, u.Name, u.Pass);
+    EbakusDB.insertObj(TableName, input);
+
+    // Get back entry
+    User memory u1;
+    bytes memory out = EbakusDB.get(TableName, "Name", "Harry");
+    (u1.Id, u1.Name, u1.Pass) = abi.decode(out, (uint64, string, string));
   }
 
   ...
@@ -76,43 +89,3 @@ contract Example {
 ### v1.0.0
 
 * Initial release
-
-## Functions
-
-The following is the list of functions available to use in your contract.
-
-#### createTable(string memory tableName, string memory indexes, string memory tablesAbi) internal
-*(EbakusDB.sol, line 8)*
-
-Create a table at EbakusDB.
-
-##### Arguments
-**string** `tableName` Table name.
-**string** `indexes` indexed table fields (comma separated).
-**string** `tablesAbi` Table structure in ABI format.
-
-#### Example for Solidity struct
-
-Solidity struct:
-
-```
-struct User {
-  uint64 Id;
-  string Name;
-  string Pass;
-}
-```
-
-ABI for table creation:
-
-```
-string memory tablesAbi = [{
-  "type": "table",
-  "name": "Users",
-  "inputs": [
-    {"name": "Id", "type": "uint64"},
-    {"name": "Name", "type": "string"},
-    {"name": "Pass", "type": "string"},
-  ]
-}]
-```

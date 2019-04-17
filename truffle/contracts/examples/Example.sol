@@ -33,8 +33,8 @@ contract Example {
 	function get() external {
 		User memory u;
 
-		bytes memory prefix = new bytes(0);
-		bytes memory out = EbakusDB.get(TableName, "Email", prefix);
+		bytes memory key = new bytes(0);
+		bytes memory out = EbakusDB.get(TableName, "Email", key);
 
 		(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
 		emit LogUser(u.Id, u.Name, u.Pass, u.Email);

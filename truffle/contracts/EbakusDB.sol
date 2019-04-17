@@ -53,11 +53,11 @@ library EbakusDB {
    * @dev Transaction will fail if nothing is mathed in EbakusDB
    * @param tableName Table name
    * @param index Index to be used for ordering and matching using the prefix
-   * @param prefix Value to be used for matching an entry
+   * @param key Value to be used for matching an entry
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function get(string memory tableName, string memory index, bytes memory prefix) internal returns (bytes memory o) {
-    bytes memory input = abi.encodeWithSignature("get(string,string,bytes)", tableName, index, prefix);
+  function get(string memory tableName, string memory index, bytes memory key) internal returns (bytes memory o) {
+    bytes memory input = abi.encodeWithSignature("get(string,string,bytes)", tableName, index, key);
     return getBytes(input);
   }
 
