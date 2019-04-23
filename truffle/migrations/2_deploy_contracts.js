@@ -82,28 +82,27 @@ module.exports = async function(deployer, network) {
         receipt.logs[0].args.Email.toString(10)
       );
     } catch (err) {
-      console.error('Get User1 err: ', err);
+      console.error('Get User2 err: ', err);
     }
 
     try {
       const receipt = await instance.deleteObj();
-      console.warn('User1 deleted: ', receipt.logs[0].args._value.toString(10));
+      console.warn('User2 deleted: ', receipt.logs[0].args._value.toString(10));
     } catch (err) {
-      console.error('User1 deletion err: ', err);
+      console.error('User2 deletion err: ', err);
     }
 
-    // TODO: enable when Harry fixes delete indexes
-    // try {
-    //   const receipt = await instance.get();
-    //   console.log(
-    //     'Get user: %d, %s, %s',
-    //     receipt.logs[0].args.Id.toString(10),
-    //     receipt.logs[0].args.Name.toString(10),
-    //     receipt.logs[0].args.Pass.toString(10),
-    //     receipt.logs[0].args.Email.toString(10)
-    //   );
-    // } catch (err) {
-    //   console.error('Get User1 err: ', err);
-    // }
+    try {
+      const receipt = await instance.get();
+      console.log(
+        'Get user: %d, %s, %s',
+        receipt.logs[0].args.Id.toString(10),
+        receipt.logs[0].args.Name.toString(10),
+        receipt.logs[0].args.Pass.toString(10),
+        receipt.logs[0].args.Email.toString(10)
+      );
+    } catch (err) {
+      console.error('Get User1 err: ', err);
+    }
   }
 };

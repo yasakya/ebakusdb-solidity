@@ -96,7 +96,7 @@ contract Example {
 	}
 
 	function deleteObj() external {
-		// delete user with Id=1
+		// delete user with Id=2
 		bytes memory input = abi.encode(2);
 		bool out = EbakusDB.deleteObj(TableName, input);
 		emit LogBool(out);
