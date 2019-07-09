@@ -7,11 +7,11 @@ module.exports = async function(deployer, network) {
     ebakusdbDeployOptions.overwrite = true;
   }
 
-  deployer.deploy(EbakusDB, ebakusdbDeployOptions);
+  await deployer.deploy(EbakusDB, ebakusdbDeployOptions);
 
   // Example use for development
   if (network === 'development') {
-    deployer.link(EbakusDB, Example);
+    await deployer.link(EbakusDB, Example);
     await deployer.deploy(Example);
 
     console.log('Example address: ', Example.address);
