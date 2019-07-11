@@ -11,6 +11,7 @@ library EbakusDB {
    * @notice Create a table at EbakusDB
    * @dev This has to be called once per table. Usually it makes sense to occur in contract's constructor,
    *      as it will run once and will be removed from the deployed code.
+   *      Important, "Id" field has to exist in every table/struct.
    * @param tableName Table name
    * @param indexes List of indexed fields (comma separated)
    * @param tablesAbi ABI represantation of the solidity struct defining the table
@@ -32,8 +33,6 @@ library EbakusDB {
    *         {"name": "Name", "type": "string"},
    *       ]
    *     }]
-   *
-   * @return true if Bugs will eat it, false otherwise
    */
   function createTable(string memory tableName, string memory indexes, string memory tablesAbi) internal {
     bytes memory input = abi.encodeWithSignature("createTable(string,string,string)", tableName, indexes, tablesAbi);
@@ -52,24 +51,32 @@ library EbakusDB {
    * @notice Get a single entry from EbakusDB
    * @dev Transaction will fail if nothing is mathed in EbakusDB
    * @param tableName Table name
-   * @param index Index to be used for ordering and matching using the prefix
-   * @param key Value to be used for matching an entry
+   * @param whereClause WhereClause for finding an entry
+   *                    Supported conditions are "<", ">", "=", "==", "<=", ">=", "!=", "LIKE"
+   *                    Example use case: Phone = "555-1111"
+   *                                      Id >= 3
+   * @param orderClause OrderClause for sorting the results using "ASC" or "DESC"
+   *                    Example use case: Phone DESC
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function get(string memory tableName, string memory index, bytes memory key) internal returns (bytes memory o) {
-    bytes memory input = abi.encodeWithSignature("get(string,string,bytes)", tableName, index, key);
+  function get(string memory tableName, bytes memory whereClause, bytes memory orderClause) internal returns (bytes memory o) {
+    bytes memory input = abi.encodeWithSignature("get(string,bytes,bytes)", tableName, whereClause, orderClause);
     return getBytes(input);
   }
 
   /**
    * @notice Select entries from EbakusDB
    * @param tableName Table name
-   * @param index Index to be used for ordering and matching using the prefix
-   * @param prefix Value to be used for matching an entry
+   * @param whereClause WhereClause for finding an entry
+   *                    Supported conditions are "<", ">", "=", "==", "<=", ">=", "!=", "LIKE"
+   *                    Example use case: Phone = "555-1111"
+   *                                      Id >= 3
+   * @param orderClause OrderClause for sorting the results using "ASC" or "DESC"
+   *                    Example use case: Phone DESC
    * @return Select iterator that has to be passed in EbakusDB.next(...)
    */
-  function select(string memory tableName, string memory index, bytes memory prefix) internal returns (bytes32 o) {
-    bytes memory input = abi.encodeWithSignature("select(string,string,bytes)", tableName, index, prefix);
+  function select(string memory tableName, string memory whereClause, bytes memory orderClause) internal returns (bytes32 o) {
+    bytes memory input = abi.encodeWithSignature("select(string,bytes,bytes)", tableName, whereClause, orderClause);
 
     assembly {
       let size := mload(input)

@@ -3,3 +3,4 @@
 
 # Other files and folders
 .vscoce/
+*.code-workspace
