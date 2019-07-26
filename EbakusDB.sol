@@ -59,8 +59,8 @@ library EbakusDB {
    *                    Example use case: Phone DESC
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function get(string memory tableName, string memory whereClause, string memory orderClause) internal returns (bytes memory o) {
-    bytes memory input = abi.encodeWithSignature("get(string,string,string)", tableName, whereClause, orderClause);
+  function get(string memory tableName, bytes memory whereClause, bytes memory orderClause) internal returns (bytes memory o) {
+    bytes memory input = abi.encodeWithSignature("get(string,bytes,bytes)", tableName, whereClause, orderClause);
     return getBytes(input);
   }
 
@@ -75,8 +75,8 @@ library EbakusDB {
    *                    Example use case: Phone DESC
    * @return Select iterator that has to be passed in EbakusDB.next(...)
    */
-  function select(string memory tableName, string memory whereClause, string memory orderClause) internal returns (bytes32 o) {
-    bytes memory input = abi.encodeWithSignature("select(string,string,string)", tableName, whereClause, orderClause);
+  function select(string memory tableName, string memory whereClause, bytes memory orderClause) internal returns (bytes32 o) {
+    bytes memory input = abi.encodeWithSignature("select(string,bytes,bytes)", tableName, whereClause, orderClause);
 
     assembly {
       let size := mload(input)
@@ -118,17 +118,6 @@ library EbakusDB {
    */
   function next(bytes32 iter) internal returns (bytes memory o, bool found) {
     bytes memory input = abi.encodeWithSignature("next(bytes32)", iter);
-    o = getBytes(input);
-    return (o, o.length > 0);
-  }
-
-  /**
-   * @notice Get previous entry for a select query made at EbakusDB
-   * @param iter Select's iterator retrieved by EbakusDB.select(...)
-   * @return ABI encoded object, read using abi.decode(...)
-   */
-  function prev(bytes32 iter) internal returns (bytes memory o, bool found) {
-    bytes memory input = abi.encodeWithSignature("prev(bytes32)", iter);
     o = getBytes(input);
     return (o, o.length > 0);
   }

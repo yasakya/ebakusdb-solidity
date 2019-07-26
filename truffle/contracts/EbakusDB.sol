@@ -123,17 +123,6 @@ library EbakusDB {
   }
 
   /**
-   * @notice Get previous entry for a select query made at EbakusDB
-   * @param iter Select's iterator retrieved by EbakusDB.select(...)
-   * @return ABI encoded object, read using abi.decode(...)
-   */
-  function prev(bytes32 iter) internal returns (bytes memory o, bool found) {
-    bytes memory input = abi.encodeWithSignature("prev(bytes32)", iter);
-    o = getBytes(input);
-    return (o, o.length > 0);
-  }
-
-  /**
    * @notice Call EbakusDB system contract and fetch back some bytes
    * @param input ABI encoded EbakusDB system contract command
    * @return ABI encoded object, read using abi.decode(...)

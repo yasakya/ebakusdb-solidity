@@ -1382,12 +1382,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0x07C11799c281C7b848C5619F43A9513613974d8d",
-      "transactionHash": "0xbfeea7cc4c9bd4f59c34a9f93d714507e2fc70f6edfebc846cd683c092d5cd1f"
+      "address": "0xe74c4d9EE1A4f610BF076fC5B2E210E781Ef2D1f",
+      "transactionHash": "0x9114c14155a3201037e9264a0197e6fd70a356d9c2a509258cbf7ee3c443db98"
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-07-11T11:02:13.871Z",
+  "updatedAt": "2019-07-26T12:18:03.528Z",
   "devdoc": {
     "methods": {}
   },
