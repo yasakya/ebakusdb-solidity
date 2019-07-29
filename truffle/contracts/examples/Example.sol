@@ -46,19 +46,19 @@ contract Example {
 
 		bytes32 iter = EbakusDB.select(TableName, "", "Name ASC");
 
-		(out ,found) = EbakusDB.next(iter);
+		(out, found) = EbakusDB.next(iter);
 		if (found) {
 			(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
 			emit LogUser(u.Id, u.Name, u.Pass, u.Email);
 		}
 
-		(out ,found) = EbakusDB.next(iter);
+		(out, found) = EbakusDB.next(iter);
 		if (found) {
 			(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
 			emit LogUser(u.Id, u.Name, u.Pass, u.Email);
 		}
 
-		(out ,found) = EbakusDB.next(iter);
+		(out, found) = EbakusDB.next(iter);
 		require(!found);
 		emit LogBool(!found);
 	}
