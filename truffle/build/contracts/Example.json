@@ -5,8 +5,7 @@
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
+      "type": "constructor"
     },
     {
       "anonymous": false,
@@ -33,8 +32,7 @@
         }
       ],
       "name": "LogUser",
-      "type": "event",
-      "signature": "0x3e01d28954fd7049403c3fdcda9bc7f1c8dfebd9513c1bb8fb9eb26a7d0633cf"
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -46,8 +44,7 @@
         }
       ],
       "name": "LogBool",
-      "type": "event",
-      "signature": "0xc33356bc2bad2ce263b056da5d061d4e89c336823d5e77f14c1383aedb7a1b3a"
+      "type": "event"
     },
     {
       "constant": false,
@@ -56,8 +53,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x6d4ce63c"
+      "type": "function"
     },
     {
       "constant": false,
@@ -66,8 +62,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x5398a96b"
+      "type": "function"
     },
     {
       "constant": false,
@@ -76,8 +71,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x82712eea"
+      "type": "function"
     },
     {
       "constant": false,
@@ -86,8 +80,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x46ca3c6d"
+      "type": "function"
     },
     {
       "constant": false,
@@ -96,8 +89,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x3d1ff2e3"
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"deleteObj\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"updateObjs\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"select\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"get\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"insertObjs\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"Id\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"Name\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"Pass\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"Email\",\"type\":\"string\"}],\"name\":\"LogUser\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"_value\",\"type\":\"bool\"}],\"name\":\"LogBool\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/ziogaschr/Sites/ebakus/ebakusdb-solidity/truffle/contracts/examples/Example.sol\":\"Example\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/ziogaschr/Sites/ebakus/ebakusdb-solidity/truffle/contracts/EbakusDB.sol\":{\"keccak256\":\"0x5262bb2607cba4af29c1637f65fae1bd3c343cff906c0bd30c94903bacb64184\",\"urls\":[\"bzzr://79682e84ee0983badb70dddc08297659440026c875a878120b3316ccadf61d41\"]},\"/Users/ziogaschr/Sites/ebakus/ebakusdb-solidity/truffle/contracts/examples/Example.sol\":{\"keccak256\":\"0x6395af8a6a900a93e03a8616e0a95af771a4d4f9eb62adcb2e623558a2f4dcad\",\"urls\":[\"bzzr://fc2a25ee08d63515a314cc81cab534cdbf7d701076152a24d314ea29ed66675e\"]}},\"version\":1}",
@@ -11684,7 +11676,7 @@
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-07-29T09:13:50.119Z",
+  "updatedAt": "2019-09-17T10:36:58.779Z",
   "devdoc": {
     "methods": {}
   },
