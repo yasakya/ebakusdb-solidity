@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ziogaschr/ebakusdb-solidity.git"
+    "url": "https://github.com/ebakus/ebakusdb-solidity"
   },
   "keywords": [
     "solidity",
@@ -17,12 +17,12 @@
     "contracts",
     "db"
   ],
-  "author": "Chris Ziogas  <chris@ebakus.com>",
+  "author": "Ebakus AG <chris@ebakus.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ziogaschr/ebakusdb-solidity/issues"
+    "url": "https://github.com/ebakus/ebakusdb-solidity/issues"
   },
-  "homepage": "https://github.com/ziogaschr/ebakusdb-solidity#readme",
+  "homepage": "https://ebakus.com",
   "devDependencies": {
     "truffle": "^5.0.10",
     "truffle-hdwallet-provider": "^1.0.6"
