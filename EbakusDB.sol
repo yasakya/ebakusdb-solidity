@@ -59,7 +59,7 @@ library EbakusDB {
    *                    Example use case: Phone DESC
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function get(string memory tableName, string memory whereClause, string memory orderClause) internal returns (bytes memory o) {
+  function get(string memory tableName, string memory whereClause, string memory orderClause) internal view returns (bytes memory o) {
     bytes memory input = abi.encodeWithSignature("get(string,string,string)", tableName, whereClause, orderClause);
     return getBytes(input);
   }
@@ -75,14 +75,14 @@ library EbakusDB {
    *                    Example use case: Phone DESC
    * @return Select iterator that has to be passed in EbakusDB.next(...)
    */
-  function select(string memory tableName, string memory whereClause, string memory orderClause) internal returns (bytes32 o) {
+  function select(string memory tableName, string memory whereClause, string memory orderClause) internal view returns (bytes32 o) {
     bytes memory input = abi.encodeWithSignature("select(string,string,string)", tableName, whereClause, orderClause);
 
     assembly {
       let size := mload(input)
       let x := add(input, 0x20)
 
-      if iszero(call(not(0), 0x102, 0, x, size, o, 0x20)) {
+      if iszero(staticcall(not(0), 0x102, x, size, o, 0x20)) {
         revert(0, 0)
       }
       o := mload(o)
@@ -116,7 +116,7 @@ library EbakusDB {
    * @param iter Select's iterator retrieved by EbakusDB.select(...)
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function next(bytes32 iter) internal returns (bytes memory o, bool found) {
+  function next(bytes32 iter) internal view returns (bytes memory o, bool found) {
     bytes memory input = abi.encodeWithSignature("next(bytes32)", iter);
     o = getBytes(input);
     return (o, o.length > 0);
@@ -127,12 +127,12 @@ library EbakusDB {
    * @param input ABI encoded EbakusDB system contract command
    * @return ABI encoded object, read using abi.decode(...)
    */
-  function getBytes(bytes memory input) private returns (bytes memory o) {
+  function getBytes(bytes memory input) private view returns (bytes memory o) {
     assembly {
       let size := mload(input)
       let x := add(input, 0x20)
 
-      if iszero(call(not(0), 0x102, 0, x, size, o, 0xffff)) {
+      if iszero(staticcall(not(0), 0x102, x, size, o, 0xffff)) {
         revert(0, 0)
       }
 

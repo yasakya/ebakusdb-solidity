@@ -30,13 +30,13 @@ contract Example {
 		EbakusDB.createTable(TableName, "Name,Email", tablesAbi);
 	}
 
-	function get() external {
+	function get() external view returns (uint id, string memory name, string memory pass, string memory email) {
 		User memory u;
 
 		bytes memory out = EbakusDB.get(TableName, "", "Email ASC");
 
 		(u.Id, u.Name, u.Pass, u.Email) = abi.decode(out, (uint64, string, string, string));
-		emit LogUser(u.Id, u.Name, u.Pass, u.Email);
+		return (u.Id, u.Name, u.Pass, u.Email);
 	}
 
 	function select() external {

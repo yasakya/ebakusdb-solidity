@@ -36,14 +36,14 @@ module.exports = async function(deployer, network) {
     try {
       const receipt = await instance.select();
       console.log(
-        'Select next: User1(%d, %s, %s, %s)',
+        'Select next: User2(%d, %s, %s, %s)',
         receipt.logs[0].args.Id.toString(10),
         receipt.logs[0].args.Name.toString(10),
         receipt.logs[0].args.Pass.toString(10),
         receipt.logs[0].args.Email.toString(10)
       );
       console.log(
-        'Select next: User2(%d, %s, %s, %s)',
+        'Select next: User1(%d, %s, %s, %s)',
         receipt.logs[1].args.Id.toString(10),
         receipt.logs[1].args.Name.toString(10),
         receipt.logs[1].args.Pass.toString(10),
@@ -73,13 +73,13 @@ module.exports = async function(deployer, network) {
     }
 
     try {
-      const receipt = await instance.get();
+      const user = await instance.get();
       console.log(
         'Get user: %d, %s, %s, %s',
-        receipt.logs[0].args.Id.toString(10),
-        receipt.logs[0].args.Name.toString(10),
-        receipt.logs[0].args.Pass.toString(10),
-        receipt.logs[0].args.Email.toString(10)
+        user.id.toString(10),
+        user.name,
+        user.pass,
+        user.email
       );
     } catch (err) {
       console.error('Get User2 err: ', err);
@@ -93,13 +93,13 @@ module.exports = async function(deployer, network) {
     }
 
     try {
-      const receipt = await instance.get();
+      const user = await instance.get();
       console.log(
         'Get user: %d, %s, %s',
-        receipt.logs[0].args.Id.toString(10),
-        receipt.logs[0].args.Name.toString(10),
-        receipt.logs[0].args.Pass.toString(10),
-        receipt.logs[0].args.Email.toString(10)
+        user.id.toString(10),
+        user.name,
+        user.pass,
+        user.email
       );
     } catch (err) {
       console.error('Get User1 err: ', err);
